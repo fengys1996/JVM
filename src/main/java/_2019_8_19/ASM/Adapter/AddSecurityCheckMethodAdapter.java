@@ -13,7 +13,7 @@ public class AddSecurityCheckMethodAdapter extends MethodVisitor
     @Override
     public void visitCode() {
         Label continueLabel = new Label();
-        visitMethodInsn(Opcodes.INVOKESTATIC, "_2019_8_19/SecurityChecker", "checkSecurity", "()Z");
+        visitMethodInsn(Opcodes.INVOKESTATIC, "_2019_8_19/ASM/SecurityChecker", "checkSecurity", "()Z");
         visitJumpInsn(Opcodes.IFNE, continueLabel);
         visitInsn(Opcodes.RETURN);
         visitLabel(continueLabel);
