@@ -1,5 +1,7 @@
 package _2019_8_27.ClassLoader;
 
+import _2019_8_19.ASM.Account;
+
 /**
  * 1.预加载.虚拟机启动时加载, 加载的是JAVA_HOME/lib/下的rt.jar下的.class文件, 这个jar包里面的内容是程序运行时非常常常用到的, 像java.lang.*、java.util.*、java.io.*等等，
  *      因此随着虚拟机一起加载. 要证明这一点很简单, 写一个空的main函数, 设置虚拟机参数为"-XX:+TraceClassLoading"来获取类加载信息,运行一下.
@@ -17,7 +19,7 @@ package _2019_8_27.ClassLoader;
  */
 public class ClassLoading
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {
         //启动类加载器(Bootstrap ClassLoader)它负责加载的是JAVA_HOME/lib下的类库，系统类加载器无法被Java程序直接应用
         //扩展类加载器(Extension ClassLoader)
@@ -43,5 +45,14 @@ public class ClassLoading
          *      相反，如果没有双亲委派模型，由各个类自己去加载的话，如果用户自己编写了一个java.lang.Object，并放在CLASSPATH下，那系统中将会出现多个不同的Object类，
          *      Java体系中最基础的行为也将无法保证，应用程序也将会变得一片混乱。
          */
+
+
+        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+        Class<?> aClass = systemClassLoader.loadClass("_2019_8_19.ASM.Account");
+        Account o = (Account)aClass.newInstance();
+        o.operation();
+
+        Account account = Account.class.newInstance();
+        account.operation();
     }
 }
