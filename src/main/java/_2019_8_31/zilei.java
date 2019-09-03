@@ -14,4 +14,10 @@ public class zilei extends fulei {
     public void print1() {
         super.print1();
     }
+
+    public String getName()
+    {
+        String name = "name";
+        return name;
+    }
 }
